@@ -1,0 +1,319 @@
+/*
+ * 1. projekt do predmetu ITW
+ * Autor: Roman Halík, xhalik01;
+ * 2014/2015
+ */
+
+body {
+    background-color: #dededd;
+    font-family: arial,sans-serif;
+    font-size: 11pt;
+    margin: 0;
+    padding: 0;
+}
+
+h1 a {
+    background-image: url("images/logo.png");
+    background-repeat: no-repeat;
+    height: 71px;
+    width: 188px;
+}
+
+#page {
+    margin: auto;
+    max-width: 1024px;
+    min-width: 650px;
+}
+
+#header {
+    background-image: url("images/head.png");
+    background-repeat: no-repeat;
+    height: 120px;
+}
+
+h1 {
+    margin: 0;
+    padding: 0;
+    position: relative; top: 20px; left: 10px;
+}
+
+h1 a {
+    background-image: url("images/logo.png");
+    background-repeat: no-repeat;
+    height: 71px;
+    width: 188px;
+}
+
+h2 {
+    font-family: sans-serif;
+    font-size: 30px;
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+}
+h3 a {
+    font-family: sans-serif;
+    font-size: 20px;
+    font-weight: normal;
+    text-decoration: underline;
+}
+
+section h4 { margin-bottom: -16px; }
+
+#rightcol h4 { margin-top: 35px; }
+
+#sitemap {
+    background-image: url("images/loginlink.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+    float: right;
+    font-size: 12px;
+    padding-right: 10px;
+    position: relative; right: 20px; top: -30px;
+}
+
+#topmenu {
+    background-image: url("images/loginlink.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+    float: right;
+    font-size: 12px;
+    padding-right: 10px;
+    position: relative; right: 60px; top: -55px;
+}
+
+#menubar {
+    float: right;
+    position: relative;
+    right: -105px;
+}
+
+#menu .selected {
+    background-image: url("images/sel.png");
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    font-weight: bold;
+    padding-bottom: 10px;
+    border: 0px;
+}
+
+#social {
+    float: right;
+    position: relative; right: 40px; top: -30px;
+}
+
+.twitter {
+    background-image: url("images/i_twitter.png");
+    background-repeat: no-repeat;
+    height: 22px;
+    width: 22px;
+}
+
+.fb {
+    background-image: url("images/i_fb.png");
+    background-repeat: no-repeat;
+    height: 22px;
+    width: 22px;
+}
+
+.linkedin {
+    background-image: url("images/i_linkedin.png");
+    background-repeat: no-repeat;
+    height: 22px;
+    width: 22px;
+}
+
+header span { display: none; }
+
+hr { display: none; }
+
+a {
+    color: black;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.hidden { display: none; }
+
+#topimg {
+    background-image: url("images/topimg.jpg");
+    height: 350px;
+}
+
+.cont {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.4);
+    color: white;
+    height: 100px;
+    width: 470px;
+    padding: 10px;
+    text-shadow: 1px 1px 0 #666;
+    float: right;
+    margin-right: 50px;
+    margin-top: 180px;
+}
+
+.cont p {
+    font-family: sans-serif;
+    font-size: 20px;
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+}
+
+.more {
+    background-image: url("images/moreb.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+    float: right;
+}
+
+.more a {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 4px;
+    padding: 15px;
+}
+
+.more a:hover { text-decoration: underline; }
+
+#feedback {
+    background: linear-gradient(#eeeeee, #bbbbbb);
+    height: 32px;
+}
+
+#fpopup {
+    background-image: url("images/feedback_up.png");
+    float: right;
+    height: 32px;
+    width: 225px;
+    position: relative; top: -10px;
+}
+
+#feedbacklink {
+    color: white;
+    font-weight: bold;
+    position: relative; right: -55px; top: 11px;
+}
+
+#content {
+  position: relative; top: -10px;
+  background-image: url("images/bgcont.jpg"), url("images/bgcont2.jpg");
+  background-repeat: no-repeat, repeat-y;
+  background-position: bottom;
+  padding-left: 40px;
+  overflow: auto;
+}
+
+#news {
+    float: left;
+    width: 604px;
+    padding-right: 20px;
+}
+
+#rightcol {
+    float: left;
+    width: 360px;
+
+}
+#footer {
+    position: relative; top: -10px;
+    background-image: url("images/bgfootfull.jpg");
+    clear: both;
+    height: 20px;
+}
+
+.copy {
+    color: white;
+    float: right;
+    font-size: 10px;
+    margin-top: 3px;
+    padding-right: 60px;
+}
+
+.menu {
+    float: left;
+    font-size: 10px;
+    margin: 0;
+    padding-left: 30px;
+}
+
+.menu a {
+    color: white;
+    margin-top: 3px;
+}
+
+.sgn {
+    color: white;
+    font-weight: bold;
+    font-size: 12px;
+    float: right;
+    margin-top: 20px;
+}
+
+.abox {
+    border-top: 1px solid gray;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 300px;
+}
+
+.link {
+    position: relative; top: -43px;
+    font-weight: bold;
+    font-size: 14px;
+    color: white;
+    float:right;
+    padding-right: 10px;
+    background-image: url('images/mores.png');
+    background-position: right;
+    background-repeat: no-repeat;  
+}
+
+.thumb {
+    background-image: url('images/thumb_didyou.png');
+    width: 250px;
+    height: 139px;
+    padding-top: 50px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-repeat: no-repeat; 
+    color: white;
+    font-size: 12px;
+}
+
+#news p:nth-of-type(1) {
+    padding-bottom: 10px;
+    border-bottom: 1px solid gray;
+}
+
+q:before {
+    background-image: url('images/quotl.png');
+    background-repeat: no-repeat;
+    padding-right: 15px;
+    padding-top: 3px;
+    margin-right: 5px;
+}
+
+q:after {
+    background-image: url('images/quotr.png');
+    background-repeat: no-repeat;
+    padding-left: 15px;
+    padding-bottom: 3px;
+    margin-left: 5px;
+} 
+
+q { quotes: "" ""; } 
+
+#menu li {
+    border-left: 1px solid gray;
+    display: inline;
+    padding-right: 6px;
+    padding-left: 10px;
+}
+
+li {
+    display: inline;
+    padding-right: 10px;
+    padding-left: 10px;
+}
