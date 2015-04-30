@@ -1,0 +1,232 @@
+% 3. projekt do predmetu ITY
+% autor: Roman Halik
+% login: xhalik01
+
+\documentclass[11pt, a4paper]{article}
+
+\usepackage[left=2cm,text={17cm, 24cm},top=3cm]{geometry}
+\usepackage[czech]{babel}
+\usepackage{times}
+\usepackage[latin2]{inputenc}
+\usepackage[IL2]{fontenc}
+\usepackage{Tabbing}
+\usepackage{multirow}
+\usepackage{epic}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage[noline,ruled,linesnumbered]{algorithm2e}
+\newenvironment{algoritmus}[1][htb]
+  {\renewcommand{\algorithmcfname}{Algoritmus}
+    \begin{algorithm}[#1]
+  }{\end{algorithm}}
+\newcommand{\myuv}[1]{\quotedblbase #1\textquotedblleft}
+
+\begin {document}
+
+  \thispagestyle{empty} % vypne cislovani stranek
+  \setcounter{page}{0} % na dalsi strane se zacne od 1
+
+  \begin{center}
+    \Huge\textsc{Vysoké uèení technické v~Brnì\\
+    \huge Fakulta informaèních technologií\\}
+    \vspace{\stretch{0.382}}
+    \LARGE Typografie a~publikování­\,--\,3.\,projekt\\
+    \Huge Tabulky a~obrázky
+    \vspace{\stretch{0.618}}
+  \end{center}
+  {\Large 6. dubna 2015 \hfill Roman Halík}
+  \newpage
+
+  \section{Úvodní strana}
+    Název práce umístìte do zlatého øezu a nezapomeòte uvést dne¹ní datum a va¹e jméno a pøíjmení.
+
+  \section{Tabulky}
+    Pro sázení tabulek mù¾eme pou¾ít buï prostøedí\texttt{ tabbing }nebo prostøedí\texttt{ tabular. }
+    
+    \subsection{Prostøedí texttt{ tabbing }}\label{sub:1}
+      Po pou¾ití\texttt{ tabbing }vypadá tabulka následovnì:
+
+      \begin{tabbing}
+        \hspace*{2.9cm}\=\hspace*{1.3cm}\= \kill 
+        \bfseries Ovoce \>
+        \bfseries Cena \>
+        \bfseries Mno¾ství \\
+        Jablka \> 25,90  \> 3\,kg \\
+        Hru¹ky \> 27,40 \> 2,5\,kg \\
+        Vodní melouny \> 35,-- \> 1\,kus \\
+      \end{tabbing}
+      Toto prostøedí se dá také pou¾ít pro sázení algoritmù, ov¹em vhodnìj¹í je pou¾í prostøedí\texttt{ algorithm }nebo\texttt{ algorithm2e }(viz sekce \ref{sec:3} ).
+
+    \subsection{Prostøedí\texttt{ tabular }}\label{sub:2}
+      Dal¹í mo¾nost, jak vytvoøit tabulku, je pou¾ít prostøedí\texttt{ tabular}. Tabulky pak budou vypadat takto{\footnote{Kdyby byl problém s\texttt{ cline, }zkuste se podívat tøeba sem: http://www.abclinuxu.cz/tex/poradna/show/325037.}}:
+
+      \begin{table}[ht] \catcode`\-=12
+        \begin{center}
+          \begin{tabular} {|c|c|c|} 
+            \hline
+            \multirow{3}{1cm}{\textbf{Mìna}} & \multicolumn{2}{|c|}{\textbf{Cena}} \\
+            \cline{2-3}
+            & \textbf{nákup} & \textbf{prodej} \\
+            \hline
+            EUR & 27,34 & 27,42 \\
+            GBP & 33,09 & 33,21 \\
+            USD & 19,87 & 19,95 \\
+            \hline
+          \end{tabular}
+          \caption{Tabulka kurzù k dne¹nímu dni}
+          \label{table:1} 
+        \end{center}
+      \end{table} 
+
+      \begin{table}[ht]
+        \center
+          \begin{tabular} {|c|c|}
+            \hline
+            $A$ & $\lnot A $\\
+            \hline
+            \textbf{P} & N \\
+            \hline
+            \textbf{O} & O \\
+            \hline
+            \textbf{X} & X \\
+            \hline
+            \textbf{N} & P \\
+            \hline
+          \end{tabular}
+          \begin{tabular} {|c|c|c|c|c|c|}
+            \hline
+            \multicolumn{2}{|c|}{\multirow{2}{*}{$A \land B$}} & \multicolumn{4}{|c|}{$B$} \\
+            \cline{3-6}
+            \multicolumn{2}{|c|}{} & \textbf{P} & \textbf{O} & \textbf{X} & \textbf{N} \\
+            \hline
+            \multirow{4}{*}{A} & \textbf{P} & P & O & X & N \\
+            \cline{2-6}
+            & \textbf{O} & O & O & N & N \\
+            \cline{2-6}
+            & \textbf{X} & X & N & X & N \\
+            \cline{2-6}
+            & \textbf{N} & N & N & N & N \\
+            \hline
+          \end{tabular}
+          \begin{tabular} { |c|c|c|c|c|c| } 
+            \hline
+            \multicolumn{2}{|c|}{\multirow{2}{*}{$A \lor B$}} & \multicolumn{4}{|c|}{$B$} \\
+            \cline{3-6}
+            \multicolumn{2}{|c|}{} & \textbf{P} & \textbf{O} & \textbf{X} & \textbf{N} \\ 
+            \hline
+            \multirow{4}{*}{A} & \textbf{P} & P & P & P & P \\
+            \cline{2-6}
+            & \textbf{O} & P & O & P & O \\
+            \cline{2-6}
+            & \textbf{X} & P & P & X & X \\
+            \cline{2-6}
+            & \textbf{N} & P & O & X & N \\
+            \hline
+          \end{tabular}
+          \begin{tabular} {|c|c|c|c|c|c|}
+            \hline
+            \multicolumn{2}{|c|}{\multirow{2}{*}{$A \to B$}} & \multicolumn{4}{|c|}{$B$} \\
+            \cline{3-6}
+            \multicolumn{2}{|c|}{} & \textbf{P} & \textbf{O} & \textbf{X} & \textbf{N} \\
+            \hline
+            \multirow{4}{*}{A} & \textbf{P} & P & O & X & N \\
+            \cline{2-6}
+            & \textbf{O} & P & O & P & O \\
+            \cline{2-6}
+            & \textbf{X} & P & P & X & X \\
+            \cline{2-6}
+            & \textbf{N} & P & P & P & P \\
+            \hline
+          \end{tabular}
+          \caption{Proto¾e Kleeneho trojhodnotová logika u¾ je \myuv{zastaralá}, uvádíme si zde pøíklad ètyøhodnotové logiky}\label{table:2}
+      \end{table} 
+
+    \newpage
+    
+    \section{Algoritmy}\label{sec:3}
+      Pokud budeme chtít vysázet algoritmus, mù¾eme pou¾ít prostøedí\texttt{ algorithm}{\footnote{Pro nápovìdu, jak zacházet s prostøedím\texttt{ algorithm, }mù¾eme zkusit tuhle stránku:\\ http://ftp.cstug.cz/pub/tex/CTAN/macros/latex/contrib/algorithms/algorithms.pdf.}} nebo\texttt{ algorithm2e}{\footnote{Pro\texttt{ algorithm2e }zase tuhle: http://ftp.cstug.cz/pub/tex/CTAN/macros/latex/contrib/algorithm2e/algorithm2e.pdf.}}. Pøíklad pou¾ití prostøedí\texttt{ algorithm2e }viz Algoritmus \ref{alg:1}.
+
+      \begin{algoritmus}
+        \SetKwInOut{Input}{Input}\SetKwInOut{Output}{Output}
+        \SetKwFor{For}{for}{do}{{end for}}
+        \SetNlSty{}{}{:}
+        \SetNlSkip{-1.20em}
+        \DontPrintSemicolon
+        \caption{\scshape Fast\MakeUppercase{slam} \label{alg:1}}
+        \KwIn{$(X_{t-1}, u_t, z_t)$}
+        \KwOut{$X_t$}
+        \BlankLine
+        \Indp
+        %zde je treba vyresit odsazeni
+          $\overline{X_t} = X_t = 0$\;
+          \For{$k = 1$ \KwTo $M$}
+          {
+            $x_t^{[k]} = $ \emph{sample\_motion\_model} $(v_t,x_{t-1}^{[k]})$\;
+            $w_t^{[k]} = $ \emph{measurement\_model} $(z_t,x_{t-1}^{[k]},m_{t-1})$\;
+            $m_t^{[k]} = $ \emph{updated\_occupancy\_grid} $(z_t,x_{t-1}^{[k]},m_{t-1}^{[k]})$\;
+            $\overline{X_t} = \overline{X_t} + \langle x_x^{[m]}, w_t^{[m]}\rangle $
+          }
+          \For{$k = 1$ \KwTo $M$}
+          {
+            draw $i$ with probability $\approx$ $w_t^{[i]}$\;
+            add $\langle x_x^{[k]}, m_t^{[k]}\rangle $ \KwTo $X_t $\;
+          }
+          \KwRet{$X_t$}
+      \end{algoritmus}
+
+    \section{Obrázky}\label{sec:4}
+      Do na¹ich èlánkù mù¾eme samozøejmì vkládat obrázky. Pokud je obrázkem fotografie, mù¾eme klidnì pou¾ít bitmapový soubor. Pokud by to mìlo být nìjaké schéma nebo nìco podobného, je dobrým zvykem takovýto obrázek vytvoøit vektorovì.
+
+      \begin{figure}[htb]
+        \begin{center}
+          \scalebox{0.4}{{\includegraphics{etiopan.eps}}
+          \reflectbox{\includegraphics{etiopan.eps}}}
+          \caption{Malý Etiopiánek a jeho bratøíèek}
+          \label{pict:1}
+        \end{center}
+      \end{figure}
+
+      Rozdíl mezi vektorovým \dots
+      \begin{figure}[htb]
+        \begin{center}
+          \scalebox{0.4}{\includegraphics{oniisan.eps}}
+          \caption{Vektorový obrázek}
+          \label{pict:2}
+        \end{center}
+      \end{figure}
+
+      \dots a bitmapovým obrázkem
+      \begin{figure}[htb]
+        \begin{center}
+          \scalebox{0.6}{\includegraphics{oniisan2.eps}}
+          \caption{Bitmapový obrázek}
+          \label{pict:3}
+        \end{center}
+      \end{figure}
+
+      se projeví napøíklad pøi zvìt¹ení.
+
+      Odkazy (nejen ty) na obrázky \ref{pict:1},\ref{pict:2},\ref{pict:3} na tabulky \ref{table:1}, \ref{table:2} a také na algoritmus \ref{alg:1} jsou udìlány pomocí køí¾ových odkazù. Pak je ov¹em potøeba zdrojový soubor pøelo¾it dvakrát.
+
+      Vektorové obrázky lze vytvoøit i pøímo v \LaTeX u, napøíklad pomocí prostøedí\texttt{ picture. } V¹echny rozmìry jsou uvádìny v mm.
+
+  \newpage
+
+  \setlength{\unitlength}{1,35mm}
+  \setlength{\arrayrulewidth}{1pt} 
+
+  \begin{figure}
+    \begin{picture}(200,160)(-9,0)
+      \linethickness{1pt}
+      \put(0,0){\framebox(115,158.5){}}
+      \multiput(15,0)(0,15){11}{\line(0,1){9}}
+      \multiput(0,144)(15,0){8}{\line(2,0){10}}
+      \put(30,124){\framebox(55,10){\textbf{Hlavièka}}}
+      \put(30,35){\framebox(55,75){\textbf{Textové tìlo}}}
+      \put(94,80){\framebox(15,10){\textbf{\shortstack{Okrajová\\poznámka}}}}
+      \put(30,10){\framebox(55,10){\textbf{Pata}}}
+    \end{picture}
+    \caption{Vektorový obrázek v prostøedí{\texttt{ picture}}.}
+  \end{figure}
+
+\end {document}
