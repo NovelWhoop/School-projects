@@ -1,0 +1,53 @@
+% 4. projekt do predmetu ITY
+% autor: Roman Halik
+% login: xhalik01
+
+\documentclass[11pt, a4paper]{article}
+
+\usepackage[left=2cm,text={17cm, 24cm},top=3cm]{geometry}
+\usepackage[czech]{babel}
+\usepackage{times}
+\usepackage[IL2]{fontenc}
+\usepackage[hyphens]{url}
+\begin{document}
+
+  \thispagestyle{empty} % vypne cislovani stranek
+  \setcounter{page}{0} % na dalsi strane se zacne od 1
+  \newcommand{\myuv}[1]{\quotedblbase #1\textquotedblleft}
+
+  \begin{center}
+    \Huge\textsc{Vysoké uèení tehcnické v~Brnì\\
+    \huge Fakulta informaèních technologií\\}
+    \vspace{\stretch{0.382}}
+    \LARGE Typografie a~publikování\,--\,4.\,projekt\\
+    \Huge Citace a~odkazy
+    \vspace{\stretch{0.618}}
+  \end{center}
+  {\Large 20.\,dubna\,2015 \hfill Roman Halík}
+  \newpage
+
+  \section{Pøedchùdci poèítaèù}
+    V tomto èlánku se budu zabývat historií výpoèetní techniky. Jeliko¾ je toto téma velmi obsáhlé, zamìøím se pouze na období od prvních pøedchùcù z~období støední a¾ mlad¹í doby kamenné, a¾ po 19.\,století.
+    \subsection{Abakus}
+      Abakus je pova¾ován za vùbec prvního pøedchùdce poèítaèù\cite{BT:1}. Vznikl pøibli¾nì pøed 5000\,lety v~Babylonii. Pùvodnì se jednalo pouze o~kámen, který symbolizoval poèet. Kupøíkladu 3\,kamínky v~nádobì znamenaly 3\,ovce. Av¹ak s~objevem pozièního zápisu zaèalo zále¾et na konkrétním umístìní ka¾dého kamínku, a~tím vznikl abakus.\cite{BOOK:2} Pou¾ívaly se napøíklad døevìné nebo hlinìné destièky, do kterých se vkládaly kamínky, takzvané \myuv{calculli}. V dne¹ní dobì mù¾eme obdobu abaku potkat v~podobì kulièkového poèítadla pro malé dìti.\cite{BT:2}
+
+    \subsection{Logaritmické tabulky}
+      Od vynálezu Abaku se dlouho ve svìtì výpoèetní techniky nic nedìlo. A¾ na poèátku 19.\,století objevil John Napier\cite{WEB:1} matematickou metodu, která umo¾òovala pomocí operací sèítání a~odèítání logaritmù realizovat operace násobení a~dìlení. Pozdìji byly v~Anglii sestaveny první logaritmické tabulky, a~následnì logaritmické pravítko, které bylo prakticky beze zmìny pou¾íváno bezmála dal¹ích 200\,let.
+
+    \subsection{Mechanické kalkulátory}
+      Vùbec první stroj, který pova¾ujeme za mechanický kalkulátor vznikl okolo roku 120 pøed na¹im letopoètem. Jednalo se o~relativnì malý stroj, který mìl slou¾it k~výpoètu polohy vesmírných tìles. Jeho mechanismus se skládal asi z~30 ozubených koleèek, které byly seøazené v~rovnostranných trojúhelnících. Zajímavé je, ¾e tento stroj byl zalo¾en na heliocentrockém principu, který byl v~Evropì uznán a¾ v~18.\,století.
+      Dal¹í známý mechanický kalkulátor vymyslel a~sestrojil roku 1623 Wilhelm Schickard\cite{WEB:3}. Tento kalkulátor ji¾ umìl sèítat a~odèítat a¾ ¹esticiferná èísla. O necelých dvacet let pozdìji pak známý fyzik Blaise Pascal sestavil ve svých 19\,letech stroj, který umìl sèítat a~odèítat. 
+      Roku 1820 spatøil svìtlo svìta první sériovì vyrábìný mechanický kalkulátor, který sestrojil Charles Xavier Thomas\cite{BOOK:1}. Tento kalkulátor ji¾ umìl provádìt v¹echny základní aritmetické operace, tedy sèítání, odèítání, násobení a~dìlení.
+
+    \subsection{Dìrné stítky}
+      První náznak vzniku dìrných ¹títkù se vyskytl v~roce 1725, kdy Basile Bouchon pou¾il dìrovaný papír na øízení tkalcovského stavu. Postupnì docházelo ke~zlep¹ování technologie, a¾ roku 1801 vymyslel Joseph Jacquard\cite{ART:3} takzvané dìrné ¹títky, díky kterým bylo mo¾né zmìnit vzor tkaní bez toho, aby se mìnila mechanika samotného stavu.
+      Tento nápad o~30\,let pozdìji vyu¾il Charles Babbage\cite{ART:1} k~programování mechanických kalkulátorù a~o~dal¹í pùl století pozdìji byl podobný princip vyu¾it pøi sèítání lidu v~USA\cite{WEB:2}. Technologie dìrných ¹títkù pozdìji poslou¾ila na návrhy prvních programovatelných strojù.
+
+  \section{První programovatelné stroje}
+    Roku 1833 se Charles Babbage posunul ve svém vývoji mechanických kalkutátorù. Jeho cíl bych sestavit univerzální programovatelný poèítaè, zalo¾ený na principu dìrných ¹títkù. Velmi chytrý návrh stroje ji¾ umo¾òoval implementaci nejjednodu¹¹ích pøíkazù if, then a~loop. 
+    O pohon poèítaèe se staral parní stroj. Poèítaè umìl pracovat s~a¾ 50\,místnými èísly a~pevnou desetinnou èárkou.
+    Charles Babbage je pova¾ován za \myuv{Otce poèítaèe}\cite{ART:2}. Díky jeho teoretickým studiím a~my¹lenkám, které mnozí jeho následovatelé vyu¾ili k~sestrojení prvních opravdových poèítaèù.
+
+\bibliographystyle{czplain}
+\bibliography{proj4}
+\end{document}
