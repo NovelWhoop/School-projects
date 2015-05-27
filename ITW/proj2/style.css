@@ -1,0 +1,238 @@
+﻿/*
+ * 2. projekt do predmetu ITW
+ * Autor: Roman Halík, xhalik01
+ * 2014/2015
+ */
+
+body{
+	background-color: white;
+	font-family: calibri;
+	font-size: 13pt;
+	margin: auto;
+	width: 100%;
+	color: #444444;
+}
+
+header{
+	background-color: #699F0C;
+}
+
+header #background{
+	float: right;
+	width: 300px;
+	height: 214px;
+	background-image: url("images/kam211.png");
+	background-repeat: no-repeat;
+}
+
+h1{
+	background-image: url("images/logo.jpg");
+	background-repeat: no-repeat;
+	width: 214px;
+	height: 78px;
+	margin-left: 20px;
+	margin-top: 40px;
+	float: left;
+}
+
+h2{
+	position: relative; left: -205px; top: 20px;
+	color: white;
+	font-size: 39px;
+	font-weight: bold;
+	padding-bottom: 20px;
+	font-style: italic;
+}
+
+h3{
+	color: #699F0C;
+	font-size: 25px;
+	font-weight: bold;
+	margin-bottom: -10px;
+	font-style: italic;
+	padding-left: 10px;
+}
+
+h4{
+	color: #444444;
+	font-size: 21px;
+	font-weight: bold;
+	margin-bottom: -10px;
+	padding-left: 10px;
+}
+
+h4 span{
+	font-size: 12px;
+	padding-left: 10px;
+	color:  #699F0C;
+	cursor: pointer;
+}
+
+a{
+	text-decoration: none;
+	color: #444444;
+}
+
+nav a{
+	color: #444444;
+	font-size: 21px;
+	padding-top: 8px;
+	padding-bottom: 3px;
+	padding-left: 5px;
+	padding-right: 5px;
+	border-left: 2px solid #B9D098;
+	border-right: 2px solid #B9D098;
+	border-bottom: 2px solid #B9D098;
+	border-top: 2px solid #B9D098;
+	border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+	margin: 8px;
+}
+
+nav a:hover{
+	border-left: 2px solid #444444;
+	border-right: 2px solid #444444;
+	border-bottom: 2px solid #444444;
+}
+
+nav{
+	font-weight: bold;
+	background-color: #B9D098;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	border-top: 2px solid #444444;
+	border-left: 2px solid #444444;
+	border-right: 2px solid #444444;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+}
+
+article, section{
+	background-color: white;
+}
+
+#content{
+	min-height: 600px;
+	background-color: white;
+	padding-top: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-bottom: 30px;
+	border-left: 2px solid #444444;
+	border-right: 2px solid #444444;
+}
+
+footer{
+	background-color:  #699F0C;
+	height: 80px;
+	font-size: 12pt;
+}
+
+#foot{
+	background-color: #B9D098;
+	padding-top: 10px;
+	padding-left: 25px;
+	padding-right: 25px;
+	padding-bottom: 10px;
+	color: #444444;
+	border-bottom: 2px solid #444444;
+	border-left: 2px solid #444444;
+	border-right: 2px solid #444444;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+}
+
+#foot a{
+	float: right;
+	padding-left: 15px;
+}
+
+#foot a:hover{
+	text-decoration: underline;
+}
+
+.centering{
+
+	margin: auto;
+	max-width: 1000px;
+	min-width: 800px;
+}
+
+.hidden{
+	display: none;
+}
+
+hr{
+	color: #444444;
+}
+
+p{
+	margin-top: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	text-align: justify;
+}
+
+#box{
+	background-image: url("images/box1.png");
+	position: relative; top: 40px; left : 250px;
+	width: 82px;
+	height: 82px;
+}
+
+#services, #about, #contact{
+	float: right;
+}
+
+#services li, #about li, #contact li{
+	list-style-type: none;
+	text-align: right;
+	color: #444444;
+	font-weight: bold;
+	font-size: 18px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 20px;
+	padding-right: 15px;
+	border-left: 2px solid #B9D098;
+	border-right: 2px solid white;
+	border-bottom: 2px solid #B9D098;
+	border-top: 2px solid #B9D098;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-right: -15px;
+}
+
+#services li:hover, #about li:hover, #contact li:hover{
+	border-left: 2px solid #444444;
+	border-top: 2px solid #444444;
+	border-bottom: 2px solid #444444;
+}
+
+#map li{
+  color: #699F0C;
+}
+
+#map li:hover{
+	color: #444444;
+	text-decoration: underline;
+}
+
+#map ul{
+	padding-left: 20px;
+}
+
+.contact{
+	list-style-type: none;
+}
+
+.images{
+	float: right;
+	margin-left: 20px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	height: 177px;
+}

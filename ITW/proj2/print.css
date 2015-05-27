@@ -1,0 +1,35 @@
+﻿/*
+ * 2. projekt do predmetu ITW
+ * Autor: Roman Halík, xhalik01
+ * 2014/2015
+ */
+
+body
+{
+    background-color: white;
+    font-family: calibri;
+    font-size: 13pt;
+    color: black;
+}
+
+h3
+{
+	color: #699F0C;
+	font-size: 24px;
+	font-weight: bold;
+    margin-bottom: -10px;
+	font-style: italic;
+}
+
+h4
+{
+	color: #444444;
+	font-size: 20px;
+	font-weight: bold;
+    margin-bottom: -10px;
+}
+
+p {text-align: justify;}
+hr {color: black;}
+header, footer, h4 span, .hidden, #services, #about, #contact {display: none;}
+#content {border: 0px;}
