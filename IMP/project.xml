@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project outputprefix="kblcd">
+
+    <!--  Project description -->
+    <name>Vypocet odmocniny</name>
+    <author>Roman Halík</author>
+    <authoremail>xhalik01@stud.fit.vutbr.cz</authoremail>
+    <revision>20151212</revision>
+    <description>Aplikace slouží pro výpočet odmocniny z celého čísla. Výpočet je prováděn buď Newtonovou metodou, nebo Metodou půlení intervalů.</description>
+
+    <!--  MCU part -->
+    <mcu>
+        <include>mcu/libs/keyboard/package.xml</include>
+        <include>mcu/libs/lcd/package.xml</include>
+        <file>main.c</file>
+    </mcu>
+
+    <!-- FPGA part -->
+    <fpga>
+        <include>fpga/ctrls/keyboard/package.xml</include>
+        <include>fpga/ctrls/lcd/package.xml</include>
+        <file>top_level.vhd</file>
+    </fpga>
+
+</project>
