@@ -1,0 +1,364 @@
+#!/usr/bin/env python3
+#author:xhalik01
+
+import getopt, sys, os, re, requests, xml.sax, socket, random, struct, hashlib
+from bencodepy import decoder, encode
+from urllib.parse import urlparse, urlencode
+from binascii import a2b_hex
+
+#globalni promenne
+url = ""
+urlAllow = True # osetruje ulozeni pouze prvni adresy pro stazeni torrentu
+torrentFilename = ""
+infoHash = ""
+rFlag = False
+iFlag = False
+tFlag = False
+aFlag = False
+tA = True
+tN = ""
+
+def main():
+    # Zpracovani parametru prikazove radky
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], "r:i:a:t:h", ["rss=", "rsX=", "input-announcement=", "input-announcemenX=", "tracker-announce-url=", "tracker-announce-urX=", "tracker-annonce-url=", "tracker-annonce-urX=", "torrent-file=", "torrent-filX=", "help", "helX"])
+    except getopt.GetoptError:
+        printErr(1)
+
+    # osetreni parametru, ktere nezacinaji '-'
+    if args:
+        printErr(1)
+
+    # promenne potrebne pro kontrolu opakovani parametru a zakazanych kombinaci
+    global url, rFlag, iFlag, tFlag, aFlag
+
+    # parsovani parametru
+    for opt, arg in opts:
+        if opt in ("-h", "--help"):
+            if len(sys.argv) != 2:
+                printErr(1)
+            printHelp()
+
+        elif opt in ("-a", "--tracker-announce-url", "--tracker-annonce-url"):
+            if aFlag == True or (iFlag == False and rFlag == False and tFlag == False):
+                printErr(1)
+            #---------------- work to to ---------------
+            print("Announce:", arg)
+            aFlag = True
+            torrentDownload(arg)
+
+        elif opt in ("-r", "--rss"):
+            if iFlag == True or rFlag == True or tFlag == True:
+                printErr(1)
+            #---------------- work to to ---------------
+            rFlag = True
+            rssParser(arg)
+            torrentDownload(url)
+            urlAllow = True # opetovne povoleni ziskani url adresy torrentu
+
+        elif opt in ("-i", "--input-announcement"):
+            if iFlag == True or rFlag == True or tFlag == True:
+                printErr(1)
+            #---------------- work to to ---------------
+            print("Input: ", arg)
+            iFlag = True
+            xmlParser(arg)
+            torrentDownload(url)
+            urlAllow = True # opetovne povoleni ziskani url adresy torrentu
+
+        elif opt in ("-t", "--torrent-file"):
+            if iFlag == True or rFlag == True or tFlag == True:
+                printErr(1)
+            #---------------- work to to ---------------
+            print("Torrent file: ", arg)
+            tFlag = True
+            torrentDownload(arg) # torrent ale nestahujeme, cast fce se preskoci
+
+        else:
+            printErr(1)
+
+# return na vypis errorove hlasky podle zadaneho errcode
+def printErr(errorCode):
+    if errorCode == 1:
+        print("Spatne zadane parametry.", file = sys.stderr)
+        printHelp()
+    elif errorCode == 2:
+        print("Nastala chyba pri otevirani souboru.", file = sys.stderr)
+        sys.exit(0)
+
+# tisk napovedy
+def printHelp():
+    sys.stdout.write("\n                                  NAPOVEDA\n"
+    "------------------------------------------------------------------------------------------------------\n"
+    "Priklad spusteni programu:\n"
+    "./antipirat (-r url | -i filename) [-a url]\n\n"
+    "Parametry:\n"
+    "-r [--rss] URL -> URL adresa RSS feedu\n"
+    "-i [--input-announcement] filename -> uložený RSS feed v souboru, napr. testing_movies_announce.xml\n"
+    "-a [--tracker-announce-url] [--tracker-annonce-url] URL -> podvržené URL trackeru pro získaní peerlistu\n"
+    "-t [--torrent-file] filename -> jiz stazeny torrent, bez pouziti RSS\n"
+    "------------------------------------------------------------------------------------------------------\n")
+    sys.exit(0)
+
+# nasledujici trida je prevzata a upravena podle potreb aplikace z tutorialspoint.com
+class MovieHandler(xml.sax.ContentHandler):
+    infoHash = "torrent:infoHash"
+    fileName = "torrent:fileName"
+
+    def __init__(self):
+        self.CurrentData = ""
+        self.title = ""
+        self.description = ""
+        self.category = ""
+        self.author = ""
+        self.link = ""
+        self.pubDate = ""
+
+    # start elementu
+    def startElement(self, tag, attributes):
+         global urlAllow, url
+         self.CurrentData = tag
+         if tag == "enclosure" and urlAllow == True: # pokud najdeme tag enclosure a zaroven je to prvni nalez
+             url = attributes["url"] # ulozime adresu
+             print("URL:", url)
+             urlAllow = False # a zakazeme ukladani dalsich adres
+
+    # konec elementu
+    def endElement(self, tag):
+        global torrentFilename, infoHash
+        if self.CurrentData == "title":
+            txtWrite("title: ", self.title)
+        elif self.CurrentData == "description":
+            txtWrite("description: ", self.description)
+            txtWrite("\n", "")
+        elif self.CurrentData == "category":
+            txtWrite("category: ", self.category)
+        elif self.CurrentData == "author":
+            txtWrite("author: ", self.author)
+        elif self.CurrentData == "link":
+            txtWrite("link: ", self.link)
+            torrentLink = self.link
+        elif self.CurrentData == "pubDate":
+            txtWrite("pubDate: ", self.pubDate)
+        elif self.CurrentData == "torrent:infoHash":
+            txtWrite("torrent:infoHash: ", self.infoHash)
+        elif self.CurrentData == "torrent:fileName":
+            txtWrite("torrent:fileName: ", self.fileName)
+            torrentFilename = self.fileName
+            global tN, tA
+            if tA == True:
+                tN = torrentFilename
+                tA = False
+        self.CurrentData = ""
+
+    # cteni znaku
+    def characters(self, content):
+        if self.CurrentData == "type":
+            self.type = content
+        elif self.CurrentData == "title":
+            self.title = content
+        elif self.CurrentData == "description":
+            self.description = content
+        elif self.CurrentData == "category":
+            self.category = content
+        elif self.CurrentData == "author":
+            self.author = content
+        elif self.CurrentData == "link":
+            self.link = content
+        elif self.CurrentData == "pubDate":
+            self.pubDate = content
+        elif self.CurrentData == "torrent:infoHash":
+            self.infoHash = content
+        elif self.CurrentData == "torrent:fileName":
+            self.fileName = content
+
+# stahne rss feed a ulozi jej do xml souboru
+def rssParser(address):
+    r = requests.get(address)
+   
+    try:
+        with open("movies_announce.xml", "w+", encoding = 'utf-8') as xmlFile:
+            xmlFile.write(r.text)
+    except:
+        printErr(2)
+
+    xmlParser("movies_announce.xml")
+
+# funkce parsuje xml soubor a vybira z nej dulezite informace pro txt soubor
+def xmlParser(fileName):
+
+    try:
+        with open("movies_announce.txt", "w", encoding = 'utf-8') as txtFile:
+            txtFile.write("")
+    except:
+        printErr(2)
+
+    # nasledujici cast kodu je prevzata a upravena z tutorialspoint.com
+    # vytvoreni XMLReader
+    parser = xml.sax.make_parser()
+    # vypnuti jmennych prostoru
+    parser.setFeature(xml.sax.handler.feature_namespaces, 0)
+
+    # override defaultniho ContextHandleru
+    Handler = MovieHandler()
+    parser.setContentHandler(Handler)
+    # konec prevzate casti kodu
+
+    try:
+        parser.parse(fileName)
+    except:
+        print("Neplatny RSS feed.", file = sys.stderr)
+        sys.exit(0)
+
+# vezme xml soubor a vyexportuje jej do txt
+def txtWrite(name, content):
+    try:
+        with open("movies_announce.txt", "a", encoding = 'utf-8') as txtFile:
+            txtFile.write(name)
+            txtFile.write(content)
+            txtFile.write("\n")
+    except:
+        printErr(2)
+
+# funkce stahne a dekoduje torrent soubor, a nasledne v nem vyhleda http trackery
+def torrentDownload(address):
+    global torrentFilename, infoHash, tFlag, aFlag, iFlag, rFlag, tN
+    peers = ""
+
+    if rFlag == True or iFlag == True: #  soubor stahujeme jen kdyz jsou aktivni priznaky r nebo i
+        index = address.index("?")
+        print("Nazev torrent souboru:",tN)
+        address = address[:index]
+        headers = {"User-Agent":"Mozzila/5.0"}
+        print("Adresa:", address)
+        print("...stahuji torrent")
+        r = requests.get(address, headers=headers)
+    
+        try:
+            with open(tN, mode = "wb") as tN:
+                tN.write(r.content)
+        except:
+            printErr(2)
+    elif tFlag == True: # tFlag zapnuty - nazvem souboru se stava zadany parametr
+        tN = address
+
+    if aFlag == False: # pokud je zadany aFlag, tuto cast vubec potrebujeme, adresu trackeru uz mame
+        #dekodovani torrentu a ulozeni trackeru
+        print("...probiha dekodovani torrent souboru a hledani http trackeru")
+        dictionary = {}
+        dictionary = decoder.decode_from_file(tN)
+        infoHash = hashlib.sha1(encode(dictionary[b'info'])).hexdigest()
+
+        # nejprve si vytvorime novy slovnik, do ktereho nahazeme vsechny announce z torrent souboru
+        trackers = {}
+        trackers = dictionary[b'announce-list']
+
+        # odstranime zanoreni
+        for i in range(len(trackers)):
+            item = trackers[i]
+            extractedItem = item[0] # ze zanoreni vytahneme ciste dvojci klic, hodnota
+            trackers[i] = extractedItem # a ulozime ji do slovniku, takze uz bude jen jednourovnovy
+
+        # pripojeni announce na konec slovniku announce-list
+        trackers.append(dictionary[b'announce'])
+
+        # vytvorime si list, do ktereho budeme vkladat nalezene http trackery
+        httpTrackers = []
+        for i in range(len(trackers)):
+            urlParse = (urlparse(trackers[i]))
+            if urlParse.scheme.decode() == "http": # hledame takovy zaznam, ktery obsahuje "http" jako polozku "scheme" v url, ten ulozime
+                httpTrackers.append(urlparse(trackers[i].decode()))
+    else:
+        httpTrackers = [1]
+        httpTrackers[0] = urlparse(address)
+
+    #print("Trackery:", httpTrackers)
+    print("Pocet http trackeru:", len(httpTrackers))
+
+    # volame dotazovani na jednotlive http trackery
+    for i in range(len(httpTrackers)):
+        try:
+            print("=====================================")
+            peers += str(trackerConnect(httpTrackers[i]))
+        except IOError:
+            print("Nepodarilo se pripojit k trackeru.", file = sys.stderr)
+
+    # zapis informaci o peerech do souboru
+    try:
+        with open(infoHash + ".peerlist", mode = "w") as peerList:
+            peerList.write(peers)
+            print("...peerlist ulozen")
+    except:
+        printErr(2)
+
+def trackerConnect(httpTrackers):
+    # ziskani ip adresy z hosta a portu
+    host, _, port = httpTrackers.netloc.rpartition(":")
+    if host == "":
+        host = httpTrackers.netloc
+        port = 80
+    address = socket.getaddrinfo(host, port)
+
+    print("host:", host)
+    print("port:", port)
+
+    # vytvoreni socketu
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.settimeout(5) # timeout 5 vterin
+    s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+
+    # nabindovani na adresu
+    s.connect((host, int(port)))
+
+    # vytvoreni GET a odeslani requestu
+    global infoHash
+    data = bytes()
+    infoHash2 = (a2b_hex(infoHash.encode("UTF-8")))
+    peer_id = random.randint(10000000000000000000, 99999999999999999999) # generovani nahodneho 20 mistneho cisla pro port ID
+    getParams = {"info_hash": infoHash2, "peer_id": peer_id, "downloaded": 0, "uploaded": 0, "left": 1, "port": 6881, "event": "started", "compact": 1, "numwant": 200}
+    query = urlencode(getParams)
+    path = "/announce"
+
+    #print("Query:", query)
+
+    # odeslani requestu
+    s.send("GET {0}?{1} HTTP/1.1\r\n\r\n".format(path, query).encode("UTF-8"))
+
+    # prijimani dat
+    while True:
+        chunk = (s.recv(1024))
+        if not chunk:
+            break
+        data += chunk
+
+    # dekodovani prijatych dat
+    # osetreni stavu, kdy tracker neodpovida - neposle data -> preskakujeme
+    try:
+        #print("Prijata data:", data)
+        data = data.split(b"\r\n\r\n")[1]
+        decoded = decoder.decode(data)
+        peersCount = (len(decoded[b'peers'])//6)
+        print("Pocet nalezenych peers:", peersCount)
+    except:
+        print("Tracker neodpovida, preskakuji.", file = sys.stderr)
+        return
+
+    binary_ip = decoded[b'peers']
+    offset = 0
+    tmpPeerList = ""
+
+    # iterujeme pres vsechny peers - zajisti postupne zvysovani offsetu
+    for i in range(peersCount):
+        peerIP = struct.unpack_from("!i", binary_ip, offset)[0] # i = int
+        finalIP = socket.inet_ntoa(struct.pack("!i", peerIP))
+        offset += 4 # ulozeni tam, kde zacina IP a konci port
+        peerPORT = struct.unpack_from("!H", binary_ip, offset)[0] # H = unsigned short
+        offset += 2
+        peerListInfo = str(finalIP) + ":" + str(peerPORT) + "\n"
+        tmpPeerList += peerListInfo
+
+    return tmpPeerList
+
+# volani funkce main, ktera provede analyzu zadanych parametru a spusti adekvatni obsluzne funkce
+if __name__ == "__main__":
+    main()

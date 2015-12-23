@@ -1,0 +1,27 @@
+Antipirat
+
+Autor: Roman Halik, xhalik01@stud.fit.vutbr.cz
+Datum: 22. 11. 2015
+
+Popis: Program na monitorovani IP adres, ktere se aktivne podili na sdileni autorsky chraneneho obsahu. Monitoruje nove pridane torrenty na serveru KickassTorrents v sekci Movies Torrents.
+
+Seznam souboru:
+  makefile      - prekladovy soubor
+  manual.pdf    - dokumentace
+  README        - readme
+  antipirat     - zdrojovy soubor
+
+Seznam rozsereni:
+  parametr -t
+
+Seznam omezeni:
+  - nekorektni fungovani volitelneho parametru -a
+
+Parametry:
+-r [--rss] URL - URL adresa RSS feedu
+-i [--input-announcement] filename - ulozeny RSS feed v souboru, napr. testing_movies_announce.xml
+-a [--tracker-annonce-url] [--tracker-announce-url] URL - podvrzene URL trackeru pro ziskani peerlistu
+-t [--torrent-file] - explicitne zadany torrent soubor, nestahuje se z RSS
+
+Priklad spusteni:
+./antipirat -r https://kat.cr/movies/?rss=1
