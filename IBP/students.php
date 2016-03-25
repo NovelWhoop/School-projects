@@ -17,29 +17,12 @@
 
     //vlozeni dat do databaze
     $result =  mysql_query("INSERT INTO students VALUES ('NULL', '$name', '$surname', '$login', '$password')", $db);
-    if (!$result){
+    if (!$result)
+    {
       die('Invalid query: ' . mysql_error());
     }
   }
 ?>
-
-<script>
-  function delete_student()
-  {
-  	var result = confirm('Opravdu chcete smazat ¾áka?');
-    if(result) alert("BAF!");
-    //if(result)
-    //{
-      //<?php 
-      //  $result =  mysql_query("DELETE FROM students WHERE ID = '4'", $db);
-      //  if (!$result){
-      //    die('Invalid query: ' . mysql_error());
-      //  }
-      //?>
-    //}
-  }
-</script>
-
 <section>
   <h2>®áci</h2>
   <h3>Pøidat ¾áka</h3>
@@ -103,8 +86,7 @@
           echo("<td>" . $students[0] . "</td>" . "<td>" . $students[1] . "</td>" . "<td>" . $students[2] . "</td>" . "<td>" .  $students[3] . "</td>"); ?>            	
           <td>
           	<a href='#' title="Editovat ¾áka"><span class='glyphicon glyphicon-pencil'></span></a>&nbsp;
-          	<span class='glyphicon glyphicon-remove' onClick="delete_student()" title="Smazat ¾áka"></span>
-            <!-- echo '<script type="text/javascript"> doDecryption(' . $myValue . '); </script>'; -->
+          	<a href='delete.php?item=students&id=<?php echo($students[0]); ?>'><span class="glyphicon glyphicon-remove" title="Smazat ¾áka"></span></a></td>
           </td>
           <?php echo("</tr>");
         }

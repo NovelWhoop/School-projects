@@ -71,7 +71,7 @@
           echo("<td>" . $teachers[0] . "</td>" . "<td>" . $teachers[1] . "</td>" . "<td>" . $teachers[2] . "</td>"); ?>            	
           <td>
           	<a href='#' title="Editovat uèitele"><span class='glyphicon glyphicon-pencil'></span></a>&nbsp;
-          	<a href='#' onClick="confirm('Opravdu chcete smazat uèitele?');" title="Smazat uèitele"><span class='glyphicon glyphicon-remove'></span></a>
+          	<a href='delete.php?item=teachers&id=<?php echo($teachers[0]); ?>'><span class="glyphicon glyphicon-remove" title="Smazat uèitele"></span></a></td>
           </td>
           <?php echo("</tr>");
         }
