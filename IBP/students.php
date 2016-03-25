@@ -73,7 +73,8 @@
       <th class="table_headers">Jméno</th>
       <th class="table_headers">Pøíjmení</th>
       <th class="table_headers">Login</th>
-      <th class="table_headers">Akce</th>
+      <th class="table_headers">Upravit</th>
+      <th class="table_headers">Smazat</th>
     </tr>
     <tr>
       <?php
@@ -82,10 +83,8 @@
         while($students = MySQL_Fetch_Row($query))
         {
           echo("<td>" . $students[0] . "</td>" . "<td>" . $students[1] . "</td>" . "<td>" . $students[2] . "</td>" . "<td>" .  $students[3] . "</td>"); ?>            	
-          <td>
-            <a href='admin.php?action=edit&item=students&id=<?php echo($students[0]); ?>'><span class="glyphicon glyphicon-pencil" title="Editovat studenta"></span></a>&nbsp;
-          	<a href='delete.php?item=students&id=<?php echo($students[0]); ?>'><span class="glyphicon glyphicon-remove" title="Smazat ¾áka"></span></a></td>
-          </td>
+          <td><a href='admin.php?action=edit&item=students&id=<?php echo($students[0]); ?>'><span class="glyphicon glyphicon-pencil" title="Editovat studenta"></span></a></td>
+          <td><a href='delete.php?item=students&id=<?php echo($students[0]); ?>'><span class="glyphicon glyphicon-remove" title="Smazat ¾áka"></span></a></td>
           <?php echo("</tr>");
         }
       ?>

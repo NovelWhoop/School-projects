@@ -1,5 +1,6 @@
 <?php
   include ("config.php");
+  $Err = 0;
 
   if(count($_POST))
   {
@@ -8,7 +9,7 @@
 
     if((empty($login)) || (empty($password)))
     {
-      header("Location: ?loginErr=1", TRUE, 303);
+      header("Location: ?Err=1", TRUE, 303);
       exit;
     }
 
@@ -26,7 +27,7 @@
     }
     else
     {
-      header("Location: ?loginErr=1", TRUE, 303);
+      header("Location: ?Err=1", TRUE, 303);
       exit;
     }
   }
@@ -59,7 +60,11 @@
           while($administration = MySQL_Fetch_Row($query))
             echo($administration[1]."<br>");
 
-          if($loginErr=1) echo('<hr><div class="alert alert-danger"><strong>Chyba!</strong> ©patný login nebo heslo.</div>');
+          if(count($_GET))
+          {
+            if($_GET['Err'] == 1) echo('<hr><div class="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<strong>Chyba!</strong> ©patný login nebo heslo.</div>');
+            else echo('<hr><div class="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<strong>Chyba!</strong> Pro pøístup na tuto stránku se prosím pøihla¹te.</div>');
+          }
         ?>
         <hr>
         <form class="form-horizontal" method="post">

@@ -58,7 +58,8 @@
       <th class="table_headers">ID</th>
       <th class="table_headers">Jméno</th>
       <th class="table_headers">Pøíjmení</th>
-      <th class="table_headers">Akce</th>
+      <th class="table_headers">Upravit</th>
+      <th class="table_headers">Smazat</th>
     </tr>
     <tr>
       <?php
@@ -67,10 +68,8 @@
         while($teachers = MySQL_Fetch_Row($query))
         {
           echo("<td>" . $teachers[0] . "</td>" . "<td>" . $teachers[1] . "</td>" . "<td>" . $teachers[2] . "</td>"); ?>            	
-          <td>
-            <a href='admin.php?action=edit&item=teachers&id=<?php echo($teachers[0]); ?>'><span class="glyphicon glyphicon-pencil" title="Editovat uèitele"></span></a>&nbsp;
-          	<a href='delete.php?item=teachers&id=<?php echo($teachers[0]); ?>'><span class="glyphicon glyphicon-remove" title="Smazat uèitele"></span></a>
-          </td>
+            <td><a href='admin.php?action=edit&item=teachers&id=<?php echo($teachers[0]); ?>'><span class="glyphicon glyphicon-pencil" title="Editovat uèitele"></span></a></td>
+          	<td><a href='delete.php?item=teachers&id=<?php echo($teachers[0]); ?>'><span class="glyphicon glyphicon-remove" title="Smazat uèitele"></span></a></td>
           <?php echo("</tr>");
         }
       ?>

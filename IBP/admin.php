@@ -3,7 +3,7 @@
   session_start();
   if(!isset($_SESSION['user']))
   {
-    header("Location: http://www.stud.fit.vutbr.cz/~xhalik01/VAV/login.php?action=notLogged", TRUE, 303);
+    header("Location: login.php?Err=2", TRUE, 303);
     exit;
   }//pokud neni promenna naplena (uzivatel neprihlasen) presmeruju ho s odpovidajici chybovou hlaskou, at se laskave prihlasi
 ?>
@@ -25,7 +25,7 @@
        <div class="pull-left nav nav-tabs">
         <nav>
           <a href="admin.php?action=schedule" <?php if(count($_GET) && ($_GET['action']) == 'schedule') echo('class="active"')?> ><h1>Rozvrh jízd</h1></a>
-          <a href="admin.php?action=edit" <?php if(count($_GET) && ($_GET['action']) == 'edit_page') echo('class="active"')?> ><h1>Editace webu</h1></a>
+          <a href="admin.php?action=edit_page" <?php if(count($_GET) && ($_GET['action']) == 'edit_page') echo('class="active"')?> ><h1>Editace webu</h1></a>
           <a href="admin.php?action=students" <?php if(count($_GET) && ($_GET['action']) == 'students') echo('class="active"')?> ><h1>®áci</h1></a>
           <a href="admin.php?action=teachers" <?php if(count($_GET) && ($_GET['action']) == 'teachers') echo('class="active"')?> ><h1>Uèitelé</h1></a>
         </nav>
