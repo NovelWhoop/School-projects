@@ -1,10 +1,3 @@
-<script language="JavaScript" type="text/javascript">
-
-  function otevri_napovedu() {
-    window.open("", "okno_napovedy", "width=250,height=150,menu=0,navigate=0,statusbar=0");
-  }
-
-</script>
 <section>
   <div class="schedule">
     <h2><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>&nbsp;26.&nbsp;1.&nbsp;2016&nbsp;<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></h2>

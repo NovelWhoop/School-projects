@@ -16,7 +16,7 @@
     // dal by tu mela byt kontrola veskerych integritnich omezeni, ale zatim predpokladame spravda data
 
     //vlozeni dat do databaze
-    $result =  mysql_query("INSERT INTO students VALUES ('NULL', '$name', '$surname', '$login', '$password')", $db);
+    $result = mysql_query("INSERT INTO students VALUES ('NULL', '$name', '$surname', '$login', '$password')", $db);
     if (!$result)
     {
       die('Invalid query: ' . mysql_error());
@@ -26,7 +26,6 @@
 <section>
   <h2>®áci</h2>
   <h3>Pøidat ¾áka</h3>
-  <hr>
   <form class="form-horizontal" method="post">
   	<div class="form-group">
       <label class="control-label col-sm-2" for="name">Jméno:</label>
@@ -43,7 +42,7 @@
     <div class="form-group">
       <label class="control-label col-sm-2" for="login">Login:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" name="login" id="login" aria-describedby="basic-addon3" placeholder="Napi¹te ¾ákùv login (rodné èíslo bez '/')">
+        <input type="text" class="form-control" name="login" id="login" aria-describedby="basic-addon3" placeholder="Napi¹te ¾ákùv login (rodné èíslo bez lomítka)">
       </div>
     </div>
     <div class="form-group">
@@ -68,7 +67,6 @@
       </div>
     </div>
   </form>
-
   <table border="1" class="center_text col-sm-offset-2">
     <tr>
       <th class="table_headers">ID</th>
@@ -85,21 +83,12 @@
         {
           echo("<td>" . $students[0] . "</td>" . "<td>" . $students[1] . "</td>" . "<td>" . $students[2] . "</td>" . "<td>" .  $students[3] . "</td>"); ?>            	
           <td>
-          	<a href='#' title="Editovat ¾áka"><span class='glyphicon glyphicon-pencil'></span></a>&nbsp;
+            <a href='admin.php?action=edit&item=students&id=<?php echo($students[0]); ?>'><span class="glyphicon glyphicon-pencil" title="Editovat studenta"></span></a>&nbsp;
           	<a href='delete.php?item=students&id=<?php echo($students[0]); ?>'><span class="glyphicon glyphicon-remove" title="Smazat ¾áka"></span></a></td>
           </td>
           <?php echo("</tr>");
         }
-        ?>
+      ?>
     </tr>
   </table>
-  <hr>
-  <ul>
-  	<li>Asi v zakladu tabulka vypisu studentu</li>
-  	<li>zrejme nejake filtry</li>
-  	<li>moznost smazani celeho radku (studenta)</li>
-  	<li>moznost editace</li>
-  	<li>moznost hledani s presmerovanim na editaci?</li>
-  	<li>moznost pridani noveho zaka, asi taky presmerovani na stranku s formularem</li>
-  </ul>
 </section>
