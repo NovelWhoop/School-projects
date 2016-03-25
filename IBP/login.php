@@ -4,7 +4,7 @@
   if(count($_POST))
   {
     $login = $_POST['login'];
-    $password = $_POST['password'];
+    $password = sha1($_POST['password']);
 
     if((empty($login)) || (empty($password)))
     {
@@ -12,7 +12,7 @@
       exit;
     }
 
-    $query1 = MySQL_Query("SELECT * FROM users where login='$login'", $db); //podle loginu vyhledam odpovidajici zaznam
+    $query1 = MySQL_Query("SELECT * FROM administration where login='$login'", $db); //podle loginu vyhledam odpovidajici zaznam
     $dbpass = MySQL_Fetch_Row($query1);
 
     if($password == $dbpass[2]) // a porovnam napsane heslo s tim, ktere nalezi danemu zaznamu
@@ -54,10 +54,10 @@
         <hr>
         <h3>Registrovaní u¾ivatelé</h3>
         <?php
-          $query = MySQL_Query("SELECT * FROM users", $db);
+          $query = MySQL_Query("SELECT * FROM administration", $db);
 
-          while($users = MySQL_Fetch_Row($query))
-            echo($users[1]."<br>");
+          while($administration = MySQL_Fetch_Row($query))
+            echo($administration[1]."<br>");
 
           if($loginErr=1) echo('<hr><div class="alert alert-danger"><strong>Chyba!</strong> ©patný login nebo heslo.</div>');
         ?>

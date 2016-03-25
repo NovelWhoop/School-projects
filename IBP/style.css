@@ -360,6 +360,10 @@ form{
 	color:black;
 }
 
+.administration span{
+	cursor: pointer;
+}
+
 .glyphicon-pencil{
 	color: #64B4FF;
 }

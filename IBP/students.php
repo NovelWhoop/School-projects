@@ -23,20 +23,21 @@
   }
 ?>
 
-<script language="JavaScript" type="text/javascript">
-  function delete_student() {
-  	confirm('Opravdu chcete smazat ¾áka?');
+<script>
+  function delete_student()
+  {
+  	var result = confirm('Opravdu chcete smazat ¾áka?');
+    if(result) alert("BAF!");
     //if(result)
-    {
+    //{
       //<?php 
       //  $result =  mysql_query("DELETE FROM students WHERE ID = '4'", $db);
       //  if (!$result){
       //    die('Invalid query: ' . mysql_error());
       //  }
       //?>
-    }
-  };
-
+    //}
+  }
 </script>
 
 <section>
@@ -102,7 +103,8 @@
           echo("<td>" . $students[0] . "</td>" . "<td>" . $students[1] . "</td>" . "<td>" . $students[2] . "</td>" . "<td>" .  $students[3] . "</td>"); ?>            	
           <td>
           	<a href='#' title="Editovat ¾áka"><span class='glyphicon glyphicon-pencil'></span></a>&nbsp;
-          	<a href='#' onClick="confirm('Opravdu chcete smazat ¾áka?');" title="Smazat ¾áka"><span class='glyphicon glyphicon-remove'></span></a>
+          	<span class='glyphicon glyphicon-remove' onClick="delete_student()" title="Smazat ¾áka"></span>
+            <!-- echo '<script type="text/javascript"> doDecryption(' . $myValue . '); </script>'; -->
           </td>
           <?php echo("</tr>");
         }
