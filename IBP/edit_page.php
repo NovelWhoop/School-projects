@@ -9,5 +9,4 @@
       </nav>
     </div>
   </div>
-  <h2>EDITACE STRÁNKY</h2>
 </section>

@@ -1,28 +1,31 @@
-<?php
-  include ("config.php");
+<section>
+  <h2>Uèitelé</h2>
+  <?php
+    include ("config.php");
 
-  if(count($_POST))
-  {
+    if(count($_POST))
+    {
     $name = $_POST['name'];
     $surname = $_POST['surname'];
 
     if((empty($name)) || (empty($surname)))
     {
-      exit;
+      echo('<div class="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<strong>Chyba!</strong> Prosím, vyplòtì v¹echna pole.</div>');
     }
+    else
+    {
+      echo('<div class="alert alert-success"><span class="glyphicon glyphicon-ok-circle"></span>&nbsp;<strong>Ulo¾eno!</strong> Záznam byl úspì¹nì vlo¾en do databáze.</div>');
+      // dal by tu mela byt kontrola veskerych integritnich omezeni, ale zatim predpokladame spravda data
 
-    // dal by tu mela byt kontrola veskerych integritnich omezeni, ale zatim predpokladame spravda data
-
-    //vlozeni dat do databaze
-    $result = mysql_query("INSERT INTO teachers VALUES ('NULL', '$name', '$surname')", $db);
-    if (!$result){
-      die('Invalid query: ' . mysql_error());
+      //vlozeni dat do databaze
+      $result = mysql_query("INSERT INTO teachers VALUES ('NULL', '$name', '$surname')", $db);
+      if (!$result)
+      {
+        die('Invalid query: ' . mysql_error());
+      }
     }
-  }
-?>
-
-<section>
-  <h2>Uèitelé</h2>
+    }
+  ?>
   <h3>Pøidat uèitele</h3>
   <form class="form-horizontal" method="post">
   	<div class="form-group">
@@ -63,7 +66,7 @@
     </tr>
     <tr>
       <?php
-        $query = MySQL_Query("SELECT * FROM teachers", $db);
+        $query = MySQL_Query("SELECT * FROM teachers ORDER BY ID DESC", $db);
 
         while($teachers = MySQL_Fetch_Row($query))
         {

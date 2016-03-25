@@ -22,7 +22,7 @@
       $_SESSION['user'] = $login;
       session_regenerate_id();
 
-      header("Location: admin.php", TRUE, 303);
+      header("Location: admin.php?action=schedule", TRUE, 303);
       exit;
     }
     else
@@ -52,21 +52,13 @@
     <article>
       <section>
         <h2>Pøihlásit se do systému</h2>
-        <hr>
-        <h3>Registrovaní u¾ivatelé</h3>
         <?php
-          $query = MySQL_Query("SELECT * FROM administration", $db);
-
-          while($administration = MySQL_Fetch_Row($query))
-            echo($administration[1]."<br>");
-
           if(count($_GET))
           {
-            if($_GET['Err'] == 1) echo('<hr><div class="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<strong>Chyba!</strong> ©patný login nebo heslo.</div>');
-            else echo('<hr><div class="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<strong>Chyba!</strong> Pro pøístup na tuto stránku se prosím pøihla¹te.</div>');
+            if($_GET['Err'] == 1) echo('<div class="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<strong>Chyba!</strong> ©patný login nebo heslo.</div>');
+            else echo('<div class="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<strong>Chyba!</strong> Pro pøístup na tuto stránku se prosím pøihla¹te.</div>');
           }
         ?>
-        <hr>
         <form class="form-horizontal" method="post">
           <div class="form-group">
             <label class="control-label col-sm-2" for="login">Login:</label>

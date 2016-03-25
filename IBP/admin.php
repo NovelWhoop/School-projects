@@ -31,9 +31,8 @@
         </nav>
       </div>
       <div class="btn pull-right">
-        <a href="logout.php">Odhlásit se</a>
+        <a href="logout.php">Odhlásit se&nbsp;<span class="glyphicon glyphicon-log-out"></span></a>
       </div>
-      <div class="pull-right"><h5>Jste pøihlá¹en jako <?php echo($_SESSION['user']); ?></h5></div>
     </header>
     <article class="administration">
       <?php
