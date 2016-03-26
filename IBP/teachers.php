@@ -5,25 +5,26 @@
 
     if(count($_POST))
     {
-    $name = $_POST['name'];
-    $surname = $_POST['surname'];
+      $name = $_POST['name'];
+      $surname = $_POST['surname'];
 
-    if((empty($name)) || (empty($surname)))
-    {
-      echo('<div class="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<strong>Chyba!</strong> Prosím, vyplòtì v¹echna pole.</div>');
-    }
-    else
-    {
-      echo('<div class="alert alert-success"><span class="glyphicon glyphicon-ok-circle"></span>&nbsp;<strong>Ulo¾eno!</strong> Záznam byl úspì¹nì vlo¾en do databáze.</div>');
-      // dal by tu mela byt kontrola veskerych integritnich omezeni, ale zatim predpokladame spravda data
-
-      //vlozeni dat do databaze
-      $result = mysql_query("INSERT INTO teachers VALUES ('NULL', '$name', '$surname')", $db);
-      if (!$result)
+      if((empty($name)) || (empty($surname)))
       {
-        die('Invalid query: ' . mysql_error());
+        echo('<div class="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<strong>Chyba!</strong> Prosím, vyplòte v¹echna pole.</div>');
       }
-    }
+      else if((strlen($name) > 256) || (strlen($surname) > 256)) // kontrola integritnich omezeni
+      {
+        echo('<div class="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<strong>Chyba!</strong> Nìkteré z vyplnìných údajù je pøíli¹ dlouhý.</div>');
+      }
+      else // vse ok, vlozime data do databaze
+      {
+        $result = mysql_query("INSERT INTO teachers VALUES ('NULL', '$name', '$surname')", $db);
+        if(!$result)
+        {
+          die('Invalid query: ' . mysql_error());
+        }
+        else echo('<div class="alert alert-success"><span class="glyphicon glyphicon-ok-circle"></span>&nbsp;<strong>Ulo¾eno!</strong> Záznam byl úspì¹nì vlo¾en do databáze.</div>');
+      }
     }
   ?>
   <h3>Pøidat uèitele</h3>

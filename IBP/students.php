@@ -15,20 +15,28 @@
       {
         echo('<div class="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<strong>Chyba!</strong> Prosím, vyplòtì v¹echna pole.</div>');
       }
-      else if($password != $password_check)
+      else if($password != $password_check) // hesla se neshoduji
       {
         echo('<div class="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<strong>Chyba!</strong> Hesla se neshodují!</div>'); 
       }
+      else if((strlen($name) > 256) || (strlen($surname) > 256) || (strlen($login) > 12) || (strlen($password) > 256) || (strlen($password_check) > 256)) // kontrola integritnich omezeni
+      {
+        echo('<div class="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<strong>Chyba!</strong> Nìkteré z vyplnìných údajù je pøíli¹ dlouhý.</div>');
+      }
+      else if(!is_int($login)) // kontrola integritnich omezeni
+      {
+        echo('<div class="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<strong>Chyba!</strong> Login musí být èíslo.</div>');
+        // jeste je treba kazdy login porovnat se vsemi ostatnimi v databazi, aby se v pripade shody (cesky vs slovensky) zmenil (napr. pridani 'a' na konec) - opravdu nesmi byt dva lide se stejnym loginem v systemu..
+      }
       else
       {
-        echo('<div class="alert alert-success"><span class="glyphicon glyphicon-ok-circle"></span>&nbsp;<strong>Ulo¾eno!</strong> Záznam byl úspì¹nì vlo¾en do databáze.</div>');
-      // dal by tu mela byt kontrola veskerych integritnich omezeni, ale zatim predpokladame spravda data
         //vlozeni dat do databaze
         $result = mysql_query("INSERT INTO students VALUES ('NULL', '$name', '$surname', '$login', '$password')", $db);
-        if (!$result)
+        if(!$result)
         {
           die('Invalid query: ' . mysql_error());
-        }  
+        }
+        else echo('<div class="alert alert-success"><span class="glyphicon glyphicon-ok-circle"></span>&nbsp;<strong>Ulo¾eno!</strong> Záznam byl úspì¹nì vlo¾en do databáze.</div>');
       }
     }
   ?>
